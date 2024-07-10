@@ -115,6 +115,7 @@ export const FormProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       } catch (error) {
         console.error('Error submit  form:', error)
       }
+      alert('form was sended')
     } else {
       console.log('Validation failed')
     }

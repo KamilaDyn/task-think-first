@@ -27,7 +27,7 @@ const PhotoField = () => {
           </label>
           <div className='border-secondary-200 border h-24 rounded-lg bg-white flex justify-center items-center'>
             <div className='text-center '>
-              {fileUpload instanceof File && fileUpload?.name && (
+              {fileUpload instanceof File && fileUpload?.name ? (
                 <div className='flex items-center justify-center'>
                   <p className='pr-2'>{fileUpload.name}</p>
                   <button
@@ -38,27 +38,28 @@ const PhotoField = () => {
                     <DeleteIcon />
                   </button>
                 </div>
+              ) : (
+                <div className='text-base flex '>
+                  <label
+                    htmlFor='fileUpload'
+                    className='text-center relative cursor-pointer rounded-md font-normal text-secondary-500 underline tracking-wider'
+                  >
+                    <button type='button' onClick={selectFile} onBlur={() => handleBlur('fileUpload')}>
+                      Upload a file
+                    </button>
+                    <input
+                      ref={fileInputRef}
+                      id='file-upload'
+                      name='fileUpload'
+                      type='file'
+                      className='sr-only'
+                      accept='image/*'
+                      onChange={updateFormData}
+                    />
+                  </label>
+                  <p className='pl-1 text-gray-200'>or drag and drop</p>
+                </div>
               )}
-              <div className='text-base flex '>
-                <label
-                  htmlFor='fileUpload'
-                  className='text-center relative cursor-pointer rounded-md font-normal text-secondary-500 underline tracking-wider'
-                >
-                  <button type='button' onClick={selectFile} onBlur={() => handleBlur('fileUpload')}>
-                    Upload a file
-                  </button>
-                  <input
-                    ref={fileInputRef}
-                    id='file-upload'
-                    name='fileUpload'
-                    type='file'
-                    className='sr-only'
-                    accept='image/*'
-                    onChange={updateFormData}
-                  />
-                </label>
-                <p className='pl-1 text-gray-200'>or drag and drop</p>
-              </div>
             </div>
           </div>
           {touchedInput.fileUpload && fileError && (
